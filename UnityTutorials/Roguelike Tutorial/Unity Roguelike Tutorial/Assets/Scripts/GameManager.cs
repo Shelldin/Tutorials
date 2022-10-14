@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 // from Unity Rogue-like Tutorial
 
@@ -15,10 +16,14 @@ public class GameManager : MonoBehaviour
     [HideInInspector] public bool playersTurn = true;
 
     public float turnDelay = .1f;
+    public float levelStartDelay = 2f;
 
-    private int level = 3;
+    private int level = 1;
     private List<Enemy> enemies;
     private bool enemiesMoving;
+    private Text levelText;
+    private GameObject levelImage;
+    private bool doingSetup;
 
 
 
@@ -39,20 +44,56 @@ public class GameManager : MonoBehaviour
         InitGame();
     }
 
+    
+    void OnLevelFinishedLoading(Scene scene, LoadSceneMode
+        mode)
+    {
+        level++;
+
+        InitGame();
+    }
+    
+    void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnLevelFinishedLoading;
+    }
+    
+    void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnLevelFinishedLoading;
+    }
+
     void InitGame()
     {
+        doingSetup = true;
+
+        levelImage = GameObject.Find("LevelImage");
+        levelText = GameObject.Find("LevelText").GetComponent<Text>();
+        levelText.text = "Day " + level;
+        levelImage.SetActive(true);
+        Invoke(nameof(HideLevelImage), levelStartDelay);
+        
         enemies.Clear();
         boardScript.SetupScene(level);
     }
 
+    private void HideLevelImage()
+    {
+        levelImage.SetActive(false);
+        doingSetup = false;
+    }
+
     public void GameOver()
     {
+        levelText.text = "After " + level + "days, you starved. Nerd.";
+        levelImage.SetActive(true);
+        
         enabled = false;
     }
 
     void Update()
     {
-        if (playersTurn || enemiesMoving)
+        if (playersTurn || enemiesMoving || doingSetup)
         {
             return;
         }
