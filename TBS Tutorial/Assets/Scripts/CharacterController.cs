@@ -10,7 +10,7 @@ public class CharacterController : MonoBehaviour
     
     void Start()
     {
-        
+        moveTarget = transform.position;
     }
 
     void Update()

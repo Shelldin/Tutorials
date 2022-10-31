@@ -7,6 +7,8 @@ public class MovePoint : MonoBehaviour
 {
     private void OnMouseDown()
     {
-        FindObjectOfType<CharacterController>().MoveToPoint(transform.position);
+        //move current player to clicked on point
+        
+        GameManager.instance.activePlayer.MoveToPoint(transform.position);
     }
 }
