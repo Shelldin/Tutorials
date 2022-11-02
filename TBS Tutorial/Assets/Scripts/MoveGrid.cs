@@ -1,0 +1,62 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class MoveGrid : MonoBehaviour
+{
+    public MovePoint startPoint;
+    
+    public Vector2Int spawnRange;
+
+    public LayerMask groundLayerCheck,
+        obstacleLayerCheck;
+
+    public float obstacleCheckRange = .4f;
+
+    public List<MovePoint> allMovePoints = new List<MovePoint>();
+
+    // Start is called before the first frame update
+    void Start()
+    {
+       GenerateMovementGrid(); 
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
+    }
+
+    //create the grid which units can move on
+    public void GenerateMovementGrid()
+    {
+        //for loops determine length and width of grid
+        for (int x = -spawnRange.x; x <= spawnRange.x; x++)
+        {
+            for (int y = -spawnRange.y; y <= spawnRange.x; y++)
+            {
+                RaycastHit hit;
+                
+                //raycast to determine if there is ground. if there's not, no move point is made
+                if (Physics.Raycast(transform.position + new Vector3(x, 10f, y),
+                        Vector3.down, out hit, 20f, groundLayerCheck))
+                {
+                    //overlap circle to determine if there are obstacles. If there are, no move point is made
+                    if (Physics.OverlapSphere(hit.point, obstacleCheckRange, obstacleLayerCheck).Length == 0)
+                    {
+                        //if there is ground and no obstacles a move point is made
+                        MovePoint newPoint = Instantiate(startPoint, hit.point,
+                            transform.rotation);
+                        //assign a parent to make editor more manageable
+                        newPoint.transform.SetParent(transform); 
+                        
+                        allMovePoints.Add(newPoint);
+                    }
+                }
+            }
+        }
+        
+        startPoint.gameObject.SetActive(false);
+        
+    }
+}
