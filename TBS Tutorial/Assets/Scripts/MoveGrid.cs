@@ -19,6 +19,8 @@ public class MoveGrid : MonoBehaviour
     void Start()
     {
        GenerateMovementGrid(); 
+       
+       HideMovePoints();
     }
 
     // Update is called once per frame
@@ -50,13 +52,21 @@ public class MoveGrid : MonoBehaviour
                         //assign a parent to make editor more manageable
                         newPoint.transform.SetParent(transform); 
                         
+                        //add move points to a list so we can hide them in the game
                         allMovePoints.Add(newPoint);
                     }
                 }
             }
         }
-        
+        //set initial star point inactive so there aren't 2 overlapping when the grid is generated
         startPoint.gameObject.SetActive(false);
-        
+    }
+    //hide each move point in the allMovePoints list
+    public void HideMovePoints()
+    {
+        foreach (MovePoint movePoint in allMovePoints)
+        {
+            movePoint.gameObject.SetActive(false);
+        }
     }
 }
