@@ -9,6 +9,10 @@ public class GameManager : MonoBehaviour
     
     public CharacterController activePlayer;
 
+    public List<CharacterController> allCharacters = new List<CharacterController>();
+    public List<CharacterController> playerTeam = new List<CharacterController>();
+    public List<CharacterController> enemyTeam = new List<CharacterController>();
+
     private void Awake()
     {
 
@@ -26,7 +30,24 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+       allCharacters.AddRange(FindObjectsOfType<CharacterController>());
+
+       foreach (CharacterController charCon in allCharacters)
+       {
+           if (!charCon.isEnemy)
+           {
+               playerTeam.Add(charCon);
+           }
+           else
+           {
+               enemyTeam.Add(charCon);
+           }
+       }
+       
+       allCharacters.Clear();
+       
+       allCharacters.AddRange(playerTeam);
+       allCharacters.AddRange(enemyTeam);
     }
 
     // Update is called once per frame
