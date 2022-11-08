@@ -10,5 +10,7 @@ public class MovePoint : MonoBehaviour
         //move current player to clicked on point
         
         GameManager.instance.activePlayer.MoveToPoint(transform.position);
+        
+        MoveGrid.instance.HideMovePoints();
     }
 }

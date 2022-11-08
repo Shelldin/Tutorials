@@ -17,6 +17,9 @@ public class GameManager : MonoBehaviour
 
     private int currentChar;
 
+    public int totalTurnPoints = 2;
+    private int turnPointsRemaining;
+
     private void Awake()
     {
 
@@ -85,6 +88,9 @@ public class GameManager : MonoBehaviour
        
        //make sure camera starts focused on the active player
        CameraController.instance.SetMoveTarget(activePlayer.transform.position);
+
+       currentChar = -1;
+       EndTurn();
     }
 
     // Update is called once per frame
@@ -96,7 +102,22 @@ public class GameManager : MonoBehaviour
     //what happens when a character is finished moving
     public void FinishedMovement()
     {
-        EndTurn();
+        SpendTurnPoints();
+    }
+
+    public void SpendTurnPoints()
+    {
+        turnPointsRemaining -= 1;
+
+        if (turnPointsRemaining <= 0)
+        {
+            EndTurn();
+        }
+        else
+        {
+            MoveGrid.instance.ShowPointsInRange(activePlayer.moveRange, activePlayer.transform.position); 
+
+        }
     }
 
     //what happens when a character ends its turn
@@ -115,7 +136,22 @@ public class GameManager : MonoBehaviour
         
         //make sure camera starts focused on the active player
         CameraController.instance.SetMoveTarget(activePlayer.transform.position);
-        
-        
+
+        turnPointsRemaining = totalTurnPoints;
+
+        if (activePlayer.isEnemy == false)
+        {
+           MoveGrid.instance.ShowPointsInRange(activePlayer.moveRange, activePlayer.transform.position); 
+        }
+        else
+        {
+            StartCoroutine(EnemySkipCoroutine());
+        }
+    }
+
+    public IEnumerator EnemySkipCoroutine()
+    {
+        yield return new WaitForSeconds(1f);
+        EndTurn();
     }
 }
