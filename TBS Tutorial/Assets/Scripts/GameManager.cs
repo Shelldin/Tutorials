@@ -18,7 +18,8 @@ public class GameManager : MonoBehaviour
     private int currentChar;
 
     public int totalTurnPoints = 2;
-    private int turnPointsRemaining;
+    [HideInInspector]
+    public int turnPointsRemaining;
 
     private void Awake()
     {
@@ -115,8 +116,17 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            MoveGrid.instance.ShowPointsInRange(activePlayer.moveRange, activePlayer.transform.position); 
-
+            if (activePlayer.isEnemy == false)
+            {
+                //MoveGrid.instance.ShowPointsInRange(activePlayer.moveRange, activePlayer.transform.position); 
+           
+                PlayerInputMenu.instance.ShowInputMenu();
+            }
+            else
+            {
+                PlayerInputMenu.instance.HideMenus();
+            
+            }
         }
     }
 
@@ -141,10 +151,14 @@ public class GameManager : MonoBehaviour
 
         if (activePlayer.isEnemy == false)
         {
-           MoveGrid.instance.ShowPointsInRange(activePlayer.moveRange, activePlayer.transform.position); 
+           //MoveGrid.instance.ShowPointsInRange(activePlayer.moveRange, activePlayer.transform.position); 
+           
+           PlayerInputMenu.instance.ShowInputMenu();
         }
         else
         {
+            PlayerInputMenu.instance.HideMenus();
+            
             StartCoroutine(EnemySkipCoroutine());
         }
     }
