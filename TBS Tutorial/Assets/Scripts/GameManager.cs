@@ -111,6 +111,8 @@ public class GameManager : MonoBehaviour
     public void SpendTurnPoints()
     {
         turnPointsRemaining -= currentActionCost;
+        
+        PlayerInputMenu.instance.UpdateTurnPointText(turnPointsRemaining);
 
         if (turnPointsRemaining <= 0)
         {
@@ -131,7 +133,6 @@ public class GameManager : MonoBehaviour
             }
         }
         
-        PlayerInputMenu.instance.UpdateTurnPointText(turnPointsRemaining);
     }
 
     //what happens when a character ends its turn

@@ -45,6 +45,13 @@ public class PlayerInputMenu : MonoBehaviour
         ShowMove();
     }
 
+    public void HideMoveMenu()
+    {
+        HideMenus();
+        MoveGrid.instance.HideMovePoints();
+        ShowInputMenu();
+    }
+
     public void ShowMove()
     {
         if (GameManager.instance.turnPointsRemaining >= 1)
