@@ -80,4 +80,9 @@ public class PlayerInputMenu : MonoBehaviour
     {
         turnPointText.text = "Turn Points Remaining: " + turnPoints;
     }
+
+    public void SkipTurn()
+    {
+        GameManager.instance.EndTurn();
+    }
 }
