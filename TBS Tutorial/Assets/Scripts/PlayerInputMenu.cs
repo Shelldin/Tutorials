@@ -7,6 +7,8 @@ public class PlayerInputMenu : MonoBehaviour
 {
     public static PlayerInputMenu instance;
 
+    public GameObject inputMenu, moveMenu;
+
     private void Awake()
     {
         if (instance == null)
@@ -19,17 +21,25 @@ public class PlayerInputMenu : MonoBehaviour
         }
         DontDestroyOnLoad(gameObject);
     }
-
-    public GameObject inputMenu;
+    
 
     public void HideMenus()
     {
         inputMenu.SetActive(false);
+        moveMenu.SetActive(false);
     }
 
     public void ShowInputMenu()
     {
         inputMenu.SetActive(true);
+    }
+
+    public void ShowMoveMenu()
+    {
+        HideMenus();
+        moveMenu.SetActive(true);
+        
+        ShowMove();
     }
 
     public void ShowMove()
@@ -38,6 +48,16 @@ public class PlayerInputMenu : MonoBehaviour
         {
             MoveGrid.instance.ShowPointsInRange
                 (GameManager.instance.activePlayer.moveRange, GameManager.instance.activePlayer.transform.position);
+            
+        }
+    }
+
+    public void ShowRun()
+    {
+        if (GameManager.instance.turnPointsRemaining >= 1)
+        {
+            MoveGrid.instance.ShowPointsInRange
+                (GameManager.instance.activePlayer.runRange, GameManager.instance.activePlayer.transform.position);
             
         }
     }

@@ -14,7 +14,8 @@ public class CharacterController : MonoBehaviour
 
     public bool isEnemy;
 
-    public float moveRange = 3.5f;
+    public float moveRange = 3.5f,
+        runRange = 8f;
 
 
     void Start()
