@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class PlayerInputMenu : MonoBehaviour
@@ -8,6 +9,8 @@ public class PlayerInputMenu : MonoBehaviour
     public static PlayerInputMenu instance;
 
     public GameObject inputMenu, moveMenu;
+
+    public TMP_Text turnPointText;
 
     private void Awake()
     {
@@ -48,17 +51,26 @@ public class PlayerInputMenu : MonoBehaviour
         {
             MoveGrid.instance.ShowPointsInRange
                 (GameManager.instance.activePlayer.moveRange, GameManager.instance.activePlayer.transform.position);
-            
+
+            GameManager.instance.currentActionCost = 1;
+
         }
     }
 
     public void ShowRun()
     {
-        if (GameManager.instance.turnPointsRemaining >= 1)
+        if (GameManager.instance.turnPointsRemaining >= 2)
         {
             MoveGrid.instance.ShowPointsInRange
                 (GameManager.instance.activePlayer.runRange, GameManager.instance.activePlayer.transform.position);
-            
+
+            GameManager.instance.currentActionCost = 2;
+
         }
+    }
+
+    public void UpdateTurnPointText(int turnPoints)
+    {
+        turnPointText.text = "Turn Points Remaining: " + turnPoints;
     }
 }

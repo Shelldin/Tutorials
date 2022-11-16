@@ -21,6 +21,8 @@ public class GameManager : MonoBehaviour
     [HideInInspector]
     public int turnPointsRemaining;
 
+    public int currentActionCost = 1;
+
     private void Awake()
     {
 
@@ -108,7 +110,7 @@ public class GameManager : MonoBehaviour
 
     public void SpendTurnPoints()
     {
-        turnPointsRemaining -= 1;
+        turnPointsRemaining -= currentActionCost;
 
         if (turnPointsRemaining <= 0)
         {
@@ -128,6 +130,8 @@ public class GameManager : MonoBehaviour
             
             }
         }
+        
+        PlayerInputMenu.instance.UpdateTurnPointText(turnPointsRemaining);
     }
 
     //what happens when a character ends its turn
@@ -154,13 +158,22 @@ public class GameManager : MonoBehaviour
            //MoveGrid.instance.ShowPointsInRange(activePlayer.moveRange, activePlayer.transform.position); 
            
            PlayerInputMenu.instance.ShowInputMenu();
+           
+           PlayerInputMenu.instance.turnPointText.gameObject.SetActive(true);
         }
         else
         {
             PlayerInputMenu.instance.HideMenus();
             
+            PlayerInputMenu.instance.turnPointText.gameObject.SetActive(false);
+
             StartCoroutine(EnemySkipCoroutine());
         }
+
+        currentActionCost = 1;
+        
+        PlayerInputMenu.instance.UpdateTurnPointText(turnPointsRemaining);
+
     }
 
     public IEnumerator EnemySkipCoroutine()
