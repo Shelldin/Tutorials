@@ -8,7 +8,9 @@ public class PlayerInputMenu : MonoBehaviour
 {
     public static PlayerInputMenu instance;
 
-    public GameObject inputMenu, moveMenu;
+    public GameObject inputMenu,
+        moveMenu,
+        meleeMenu;
 
     public TMP_Text turnPointText;
 
@@ -30,6 +32,7 @@ public class PlayerInputMenu : MonoBehaviour
     {
         inputMenu.SetActive(false);
         moveMenu.SetActive(false);
+        meleeMenu.SetActive(false);
     }
 
     public void ShowInputMenu()
@@ -84,5 +87,17 @@ public class PlayerInputMenu : MonoBehaviour
     public void SkipTurn()
     {
         GameManager.instance.EndTurn();
+    }
+
+    public void ShowMeleeMenu()
+    {
+        HideMenus();
+        meleeMenu.SetActive(true);
+    }
+
+    public void HideMeleeMenu()
+    {
+        HideMenus();
+        ShowInputMenu();
     }
 }
