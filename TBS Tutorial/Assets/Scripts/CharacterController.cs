@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -16,6 +17,10 @@ public class CharacterController : MonoBehaviour
 
     public float moveRange = 3.5f,
         runRange = 8f;
+
+    public float meleeRange = 1.5f;
+    [HideInInspector]
+    public List<CharacterController> meleeTargets = new List<CharacterController>();
 
 
     void Start()
@@ -57,5 +62,31 @@ public class CharacterController : MonoBehaviour
 
         navAgent.SetDestination(moveTarget);
         isMoving = true;
+    }
+
+    public void GetMeleeTargets()
+    {
+        meleeTargets.Clear();
+
+        if (!isEnemy)
+        {
+            foreach (CharacterController charCon in GameManager.instance.enemyTeam)
+            {
+                if (Vector3.Distance(transform.position, charCon.transform.position) < meleeRange)
+                {
+                    meleeTargets.Add(charCon);
+                }
+            }
+        }
+        else
+        {
+            foreach (CharacterController charCon in GameManager.instance.playerTeam)
+            {
+                if (Vector3.Distance(transform.position, charCon.transform.position) < meleeRange)
+                {
+                    meleeTargets.Add(charCon);
+                }
+            }
+        }
     }
 }

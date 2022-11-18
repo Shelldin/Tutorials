@@ -100,4 +100,18 @@ public class PlayerInputMenu : MonoBehaviour
         HideMenus();
         ShowInputMenu();
     }
+
+    public void CheckMelee()
+    {
+        GameManager.instance.activePlayer.GetMeleeTargets();
+
+        if (GameManager.instance.activePlayer.meleeTargets.Count > 0)
+        {
+            ShowMeleeMenu();
+        }
+        else
+        {
+            
+        }
+    }
 }
