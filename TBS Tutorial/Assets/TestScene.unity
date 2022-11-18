@@ -241,7 +241,7 @@ PrefabInstance:
       objectReference: {fileID: 308352499}
     - target: {fileID: 7239069982919612424, guid: 52e56e3bdc9f81443a32c8d704bd93e2, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: ShowMeleeMenu
+      value: CheckMelee
       objectReference: {fileID: 0}
     - target: {fileID: 7239069982919612424, guid: 52e56e3bdc9f81443a32c8d704bd93e2, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
@@ -1459,7 +1459,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8982282183016503192, guid: ac50bd7a84c2bb94788b0b9107544dad, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 7.4300003
+      value: 7.75
       objectReference: {fileID: 0}
     - target: {fileID: 8982282183016503192, guid: ac50bd7a84c2bb94788b0b9107544dad, type: 3}
       propertyPath: m_LocalRotation.w
@@ -2817,7 +2817,7 @@ PrefabInstance:
       objectReference: {fileID: 308352499}
     - target: {fileID: 7239069982919612424, guid: 52e56e3bdc9f81443a32c8d704bd93e2, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: 
+      value: HitButton
       objectReference: {fileID: 0}
     - target: {fileID: 7239069982919612424, guid: 52e56e3bdc9f81443a32c8d704bd93e2, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName

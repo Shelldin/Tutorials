@@ -114,4 +114,13 @@ public class PlayerInputMenu : MonoBehaviour
             
         }
     }
+
+    public void HitButton()
+    {
+        GameManager.instance.activePlayer.MeleeAttack();
+        GameManager.instance.currentActionCost = 1;
+        
+        HideMenus();
+        GameManager.instance.SpendTurnPoints();
+    }
 }

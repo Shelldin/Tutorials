@@ -19,7 +19,7 @@ public class CharacterController : MonoBehaviour
         runRange = 8f;
 
     public float meleeRange = 1.5f;
-    [HideInInspector]
+    //[HideInInspector]
     public List<CharacterController> meleeTargets = new List<CharacterController>();
 
 
@@ -88,5 +88,10 @@ public class CharacterController : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void MeleeAttack()
+    {
+        meleeTargets[0].gameObject.SetActive(false);
     }
 }
