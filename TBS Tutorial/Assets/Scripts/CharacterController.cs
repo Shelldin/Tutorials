@@ -19,8 +19,10 @@ public class CharacterController : MonoBehaviour
         runRange = 8f;
 
     public float meleeRange = 1.5f;
-    //[HideInInspector]
+    [HideInInspector]
     public List<CharacterController> meleeTargets = new List<CharacterController>();
+    [HideInInspector]
+    public int currentMeleeTarget;
 
 
     void Start()
@@ -88,10 +90,15 @@ public class CharacterController : MonoBehaviour
                 }
             }
         }
+
+        if (currentMeleeTarget >= meleeTargets.Count)
+        {
+            currentMeleeTarget = 0;
+        }
     }
 
     public void MeleeAttack()
     {
-        meleeTargets[0].gameObject.SetActive(false);
+        meleeTargets[currentMeleeTarget].gameObject.SetActive(false);
     }
 }

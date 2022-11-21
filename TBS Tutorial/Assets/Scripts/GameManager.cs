@@ -23,6 +23,8 @@ public class GameManager : MonoBehaviour
 
     public int currentActionCost = 1;
 
+    public GameObject targetIndicatorObj;
+
     private void Awake()
     {
 

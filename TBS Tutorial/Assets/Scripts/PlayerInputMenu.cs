@@ -13,6 +13,8 @@ public class PlayerInputMenu : MonoBehaviour
         meleeMenu;
 
     public TMP_Text turnPointText;
+    
+    public float actionWaitTime = 1f;
 
     private void Awake()
     {
@@ -99,6 +101,8 @@ public class PlayerInputMenu : MonoBehaviour
     {
         HideMenus();
         ShowInputMenu();
+        
+        GameManager.instance.targetIndicatorObj.SetActive(false);
     }
 
     public void CheckMelee()
@@ -108,6 +112,10 @@ public class PlayerInputMenu : MonoBehaviour
         if (GameManager.instance.activePlayer.meleeTargets.Count > 0)
         {
             ShowMeleeMenu();
+            
+            GameManager.instance.targetIndicatorObj.SetActive(true);
+            GameManager.instance.targetIndicatorObj.transform.position =
+                GameManager.instance.activePlayer.meleeTargets[GameManager.instance.activePlayer.currentMeleeTarget].transform.position;
         }
         else
         {
@@ -121,6 +129,24 @@ public class PlayerInputMenu : MonoBehaviour
         GameManager.instance.currentActionCost = 1;
         
         HideMenus();
+        StartCoroutine(WaitToEndActionCoroutine(actionWaitTime));
+    }
+
+    public IEnumerator WaitToEndActionCoroutine(float timeToWait)
+    {
+        yield return new WaitForSeconds(timeToWait);
+        
         GameManager.instance.SpendTurnPoints();
+    }
+
+    public void NextMeleeTargetButton()
+    {
+        GameManager.instance.activePlayer.currentMeleeTarget++;
+        if (GameManager.instance.activePlayer.currentMeleeTarget >= GameManager.instance.activePlayer.meleeTargets.Count)
+        {
+            GameManager.instance.activePlayer.currentMeleeTarget = 0;
+        }
+        GameManager.instance.targetIndicatorObj.transform.position =
+            GameManager.instance.activePlayer.meleeTargets[GameManager.instance.activePlayer.currentMeleeTarget].transform.position;
     }
 }
