@@ -29,12 +29,14 @@ public class CameraController : MonoBehaviour
             Destroy(gameObject);
         }
         DontDestroyOnLoad(gameObject);
+        
+        moveTarget = transform.position;
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        moveTarget = transform.position;
+       
     }
 
     // Update is called once per frame

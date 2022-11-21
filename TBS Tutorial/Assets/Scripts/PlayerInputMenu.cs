@@ -12,9 +12,13 @@ public class PlayerInputMenu : MonoBehaviour
         moveMenu,
         meleeMenu;
 
-    public TMP_Text turnPointText;
+    public TMP_Text turnPointText,
+        errorText;
     
-    public float actionWaitTime = 1f;
+    public float actionWaitTime = 1f,
+        errorDisplayTime = 3f;
+
+    private float errorCounter;
 
     private void Awake()
     {
@@ -28,7 +32,20 @@ public class PlayerInputMenu : MonoBehaviour
         }
         DontDestroyOnLoad(gameObject);
     }
-    
+
+    private void Update()
+    {
+        if (errorCounter>0)
+        {
+            errorCounter -= Time.deltaTime;
+
+            if (errorCounter<=0)
+            {
+                errorText.gameObject.SetActive(false);
+            }
+        }
+    }
+
 
     public void HideMenus()
     {
@@ -119,7 +136,7 @@ public class PlayerInputMenu : MonoBehaviour
         }
         else
         {
-            
+            ShowErrorText("No targets in melee range.");
         }
     }
 
@@ -148,5 +165,13 @@ public class PlayerInputMenu : MonoBehaviour
         }
         GameManager.instance.targetIndicatorObj.transform.position =
             GameManager.instance.activePlayer.meleeTargets[GameManager.instance.activePlayer.currentMeleeTarget].transform.position;
+    }
+
+    public void ShowErrorText(string errorMessageString)
+    {
+        errorText.text = errorMessageString;
+        errorText.gameObject.SetActive(true);
+
+        errorCounter = errorDisplayTime;
     }
 }
