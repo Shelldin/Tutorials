@@ -1,9 +1,11 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 
 public class CharacterController : MonoBehaviour
@@ -29,6 +31,9 @@ public class CharacterController : MonoBehaviour
     [HideInInspector]
     public float currentHealth;
 
+    public TMP_Text healthText;
+    public Slider healthSlider;
+
     public float meleeDamage = 5f;
 
 
@@ -40,6 +45,8 @@ public class CharacterController : MonoBehaviour
         navAgent.speed = moveSpeed;
 
         currentHealth = maxHealth;
+        
+        UpdateHealthUI();
     }
 
     void Update()
@@ -133,5 +140,15 @@ public class CharacterController : MonoBehaviour
                 GameManager.instance.enemyTeam.Remove(this);
             }
         }
+        
+        UpdateHealthUI();
+    }
+
+    public void UpdateHealthUI()
+    {
+        healthText.text = "HP: " + currentHealth + "/" + maxHealth;
+
+        healthSlider.maxValue = maxHealth;
+        healthSlider.value = currentHealth;
     }
 }
