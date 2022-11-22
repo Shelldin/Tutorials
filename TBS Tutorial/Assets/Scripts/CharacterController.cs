@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -108,14 +109,29 @@ public class CharacterController : MonoBehaviour
     public void MeleeAttack()
     {
         meleeTargets[currentMeleeTarget].TakeDamage(meleeDamage);
-        if (meleeTargets[currentMeleeTarget].currentHealth <= 0)
-        {
-            meleeTargets[currentMeleeTarget].gameObject.SetActive(false);
-        }
+        
     }
 
     public void TakeDamage(float damageAmount)
     {
         currentHealth -= damageAmount;
+
+        if (currentHealth <= 0)
+        {
+            currentHealth = 0;
+            navAgent.enabled = false;
+            transform.rotation = Quaternion.Euler(-70f, transform.rotation.eulerAngles.y, 0);
+
+            GameManager.instance.allCharacters.Remove(this);
+            if (GameManager.instance.playerTeam.Contains(this))
+            {
+                GameManager.instance.playerTeam.Remove(this);
+            }
+
+            if (GameManager.instance.enemyTeam.Contains(this))
+            {
+                GameManager.instance.enemyTeam.Remove(this);
+            }
+        }
     }
 }
