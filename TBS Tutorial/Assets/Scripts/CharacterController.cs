@@ -24,6 +24,12 @@ public class CharacterController : MonoBehaviour
     [HideInInspector]
     public int currentMeleeTarget;
 
+    public float maxHealth = 10f;
+    [HideInInspector]
+    public float currentHealth;
+
+    public float meleeDamage = 5f;
+
 
     void Start()
     {
@@ -31,6 +37,8 @@ public class CharacterController : MonoBehaviour
         moveTarget = transform.position;
 
         navAgent.speed = moveSpeed;
+
+        currentHealth = maxHealth;
     }
 
     void Update()
@@ -99,6 +107,15 @@ public class CharacterController : MonoBehaviour
 
     public void MeleeAttack()
     {
-        meleeTargets[currentMeleeTarget].gameObject.SetActive(false);
+        meleeTargets[currentMeleeTarget].TakeDamage(meleeDamage);
+        if (meleeTargets[currentMeleeTarget].currentHealth <= 0)
+        {
+            meleeTargets[currentMeleeTarget].gameObject.SetActive(false);
+        }
+    }
+
+    public void TakeDamage(float damageAmount)
+    {
+        currentHealth -= damageAmount;
     }
 }
