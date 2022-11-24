@@ -10,7 +10,8 @@ public class PlayerInputMenu : MonoBehaviour
 
     public GameObject inputMenu,
         moveMenu,
-        meleeMenu;
+        meleeMenu,
+        shootMenu;
 
     public TMP_Text turnPointText,
         errorText;
@@ -52,6 +53,7 @@ public class PlayerInputMenu : MonoBehaviour
         inputMenu.SetActive(false);
         moveMenu.SetActive(false);
         meleeMenu.SetActive(false);
+        shootMenu.SetActive(false);
     }
 
     public void ShowInputMenu()
@@ -176,5 +178,19 @@ public class PlayerInputMenu : MonoBehaviour
         errorText.gameObject.SetActive(true);
 
         errorCounter = errorDisplayTime;
+    }
+
+    public void ShowShootMenu()
+    {
+        HideMenus();
+        shootMenu.SetActive(true);
+    }
+
+    public void HideShootMenu()
+    {
+        HideMenus();
+        ShowInputMenu();
+        
+        GameManager.instance.targetIndicatorObj.SetActive(false);
     }
 }
