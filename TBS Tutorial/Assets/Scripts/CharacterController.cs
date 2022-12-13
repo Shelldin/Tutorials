@@ -36,6 +36,14 @@ public class CharacterController : MonoBehaviour
 
     public float meleeDamage = 5f;
 
+    public float shootRange,
+        shootDamage;
+
+    [HideInInspector]
+    public List<CharacterController> shootTargets = new List<CharacterController>();
+    [HideInInspector]
+    public int currentShootTarget;
+
 
     void Start()
     {
@@ -150,5 +158,21 @@ public class CharacterController : MonoBehaviour
 
         healthSlider.maxValue = maxHealth;
         healthSlider.value = currentHealth;
+    }
+
+    public void GetShootTargets()
+    {
+        shootTargets.Clear();
+
+        if (!isEnemy)
+        {
+            foreach (CharacterController charCon in GameManager.instance.enemyTeam)
+            {
+                if (Vector3.Distance(transform.position, charCon.transform.position) < shootRange)
+                {
+                    shootTargets.Add(charCon);
+                }
+            }
+        }
     }
 }
