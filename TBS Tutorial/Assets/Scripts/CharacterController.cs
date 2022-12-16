@@ -174,5 +174,20 @@ public class CharacterController : MonoBehaviour
                 }
             }
         }
+        else
+        {
+            foreach (CharacterController charCon in GameManager.instance.playerTeam)
+            {
+                if (Vector3.Distance(transform.position, charCon.transform.position) < shootRange)
+                {
+                    shootTargets.Add(charCon);
+                }
+            }
+        }
+
+        if (currentShootTarget >= shootTargets.Count)
+        {
+            currentShootTarget = 0;
+        }
     }
 }

@@ -604,6 +604,10 @@ MonoBehaviour:
   healthText: {fileID: 1728468330}
   healthSlider: {fileID: 168644993}
   meleeDamage: 5
+  shootRange: 10
+  shootDamage: 3
+  shootTargets: []
+  currentShootTarget: 0
 --- !u!195 &710890418
 NavMeshAgent:
   m_ObjectHideFlags: 0

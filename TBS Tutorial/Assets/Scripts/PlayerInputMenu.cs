@@ -193,4 +193,33 @@ public class PlayerInputMenu : MonoBehaviour
         
         GameManager.instance.targetIndicatorObj.SetActive(false);
     }
+
+    public void CheckShoot()
+    {
+        GameManager.instance.activePlayer.GetShootTargets();
+
+        if (GameManager.instance.activePlayer.shootTargets.Count > 0)
+        {
+            ShowShootMenu();
+            
+            GameManager.instance.targetIndicatorObj.SetActive(true);
+            GameManager.instance.targetIndicatorObj.transform.position =
+                GameManager.instance.activePlayer.shootTargets[GameManager.instance.activePlayer.currentShootTarget].transform.position;
+        }
+        else
+        {
+            ShowErrorText("No Enemies in Range");
+        }
+    }
+
+    public void NextShootTarget()
+    {
+        GameManager.instance.activePlayer.currentShootTarget++;
+        if (GameManager.instance.activePlayer.currentShootTarget >= GameManager.instance.activePlayer.shootTargets.Count)
+        {
+            GameManager.instance.activePlayer.currentShootTarget = 0;
+        }
+        GameManager.instance.targetIndicatorObj.transform.position =
+            GameManager.instance.activePlayer.shootTargets[GameManager.instance.activePlayer.currentShootTarget].transform.position;
+    }
 }

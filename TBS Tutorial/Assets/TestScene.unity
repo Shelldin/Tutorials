@@ -1808,7 +1808,7 @@ PrefabInstance:
       objectReference: {fileID: 308352499}
     - target: {fileID: 7239069982919612424, guid: 52e56e3bdc9f81443a32c8d704bd93e2, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: 
+      value: NextShootTarget
       objectReference: {fileID: 0}
     - target: {fileID: 7239069982919612424, guid: 52e56e3bdc9f81443a32c8d704bd93e2, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
@@ -2822,7 +2822,7 @@ PrefabInstance:
       objectReference: {fileID: 308352499}
     - target: {fileID: 7239069982919612424, guid: 52e56e3bdc9f81443a32c8d704bd93e2, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: ShowShootMenu
+      value: CheckShoot
       objectReference: {fileID: 0}
     - target: {fileID: 7239069982919612424, guid: 52e56e3bdc9f81443a32c8d704bd93e2, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
