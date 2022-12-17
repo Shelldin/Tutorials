@@ -222,4 +222,13 @@ public class PlayerInputMenu : MonoBehaviour
         GameManager.instance.targetIndicatorObj.transform.position =
             GameManager.instance.activePlayer.shootTargets[GameManager.instance.activePlayer.currentShootTarget].transform.position;
     }
+
+    public void FireShotButton()
+    {
+        GameManager.instance.activePlayer.FireShot();
+
+        GameManager.instance.currentActionCost = 1;
+        HideMenus();
+        StartCoroutine(WaitToEndActionCoroutine(1f));
+    }
 }

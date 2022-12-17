@@ -44,6 +44,8 @@ public class CharacterController : MonoBehaviour
     [HideInInspector]
     public int currentShootTarget;
 
+    public Transform shootPoint;
+
 
     void Start()
     {
@@ -189,5 +191,10 @@ public class CharacterController : MonoBehaviour
         {
             currentShootTarget = 0;
         }
+    }
+
+    public void FireShot()
+    {
+        
     }
 }
