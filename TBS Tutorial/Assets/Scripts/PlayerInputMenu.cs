@@ -229,6 +229,9 @@ public class PlayerInputMenu : MonoBehaviour
 
         GameManager.instance.currentActionCost = 1;
         HideMenus();
+        
+        GameManager.instance.targetIndicatorObj.SetActive(false);
+
         StartCoroutine(WaitToEndActionCoroutine(1f));
     }
 }

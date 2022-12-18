@@ -195,6 +195,8 @@ public class CharacterController : MonoBehaviour
 
     public void FireShot()
     {
-        
+        Vector3 targetPoint = shootTargets[currentShootTarget].transform.position;
+
+        Vector3 shootDirection = targetPoint - shootPoint.position;
     }
 }
