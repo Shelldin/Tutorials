@@ -199,7 +199,21 @@ public class CharacterController : MonoBehaviour
             shootTargets[currentShootTarget].shootPoint.transform.position.y, shootTargets[currentShootTarget].transform.position.z);
 
         Vector3 shootDirection = (targetPoint - shootPoint.position).normalized;
-        
-        
+
+        RaycastHit hit;
+        if (Physics.Raycast(shootPoint.position, shootDirection, out hit, shootRange))
+        {
+            if (hit.collider.gameObject == shootTargets[currentShootTarget].gameObject)
+            {
+                Debug.Log(name + " shot target " + shootTargets[currentShootTarget].name);
+                shootTargets[currentShootTarget].TakeDamage(shootDamage);
+            }
+            else
+            {
+                Debug.Log(name + " missed " + shootTargets[currentShootTarget].name);
+            
+                PlayerInputMenu.instance.ShowErrorText("Shot Missed");
+            }
+        }
     }
 }
