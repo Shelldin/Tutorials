@@ -6,6 +6,7 @@ using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 
 public class CharacterController : MonoBehaviour
@@ -45,6 +46,8 @@ public class CharacterController : MonoBehaviour
     public int currentShootTarget;
 
     public Transform shootPoint;
+
+    public Vector3 shotMissRange;
 
 
     void Start()
@@ -198,6 +201,13 @@ public class CharacterController : MonoBehaviour
         Vector3 targetPoint = new Vector3(shootTargets[currentShootTarget].transform.position.x,
             shootTargets[currentShootTarget].shootPoint.transform.position.y, shootTargets[currentShootTarget].transform.position.z);
 
+        Vector3 targetOffset = new Vector3(Random.Range(-shotMissRange.x, shotMissRange.x),
+            Random.Range(-shotMissRange.y, shotMissRange.y), Random.Range(-shotMissRange.z, shotMissRange.z));
+        
+      targetOffset = targetOffset *  (Vector3.Distance(targetPoint, shootPoint.position)/shootRange);
+
+      targetPoint += targetOffset;
+
         Vector3 shootDirection = (targetPoint - shootPoint.position).normalized;
 
         RaycastHit hit;
@@ -214,6 +224,10 @@ public class CharacterController : MonoBehaviour
             
                 PlayerInputMenu.instance.ShowErrorText("Shot Missed");
             }
+        }
+        else
+        {
+            PlayerInputMenu.instance.ShowErrorText("Shot Missed");
         }
     }
 }
