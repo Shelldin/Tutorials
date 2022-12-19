@@ -80,6 +80,26 @@ PrefabInstance:
       propertyPath: isEnemy
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 55171847, guid: ac50bd7a84c2bb94788b0b9107544dad, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.051
+      objectReference: {fileID: 0}
+    - target: {fileID: 55171847, guid: ac50bd7a84c2bb94788b0b9107544dad, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.283
+      objectReference: {fileID: 0}
+    - target: {fileID: 55171847, guid: ac50bd7a84c2bb94788b0b9107544dad, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.108
+      objectReference: {fileID: 0}
+    - target: {fileID: 1173084842, guid: ac50bd7a84c2bb94788b0b9107544dad, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1173084842, guid: ac50bd7a84c2bb94788b0b9107544dad, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1173084843, guid: ac50bd7a84c2bb94788b0b9107544dad, type: 3}
       propertyPath: m_Color.b
       value: 0.12439912
