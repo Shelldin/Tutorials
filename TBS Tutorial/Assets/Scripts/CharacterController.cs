@@ -49,6 +49,10 @@ public class CharacterController : MonoBehaviour
 
     public Vector3 shotMissRange;
 
+    public LineRenderer bulletTrailLine;
+    public float bulletTrailDuration = .5f;
+    private float bulletTrailCounter;
+
 
     void Start()
     {
@@ -60,6 +64,10 @@ public class CharacterController : MonoBehaviour
         currentHealth = maxHealth;
         
         UpdateHealthUI();
+
+        bulletTrailLine.transform.position = Vector3.zero;
+        bulletTrailLine.transform.rotation = Quaternion.identity;
+        bulletTrailLine.transform.SetParent(null);
     }
 
     void Update()
@@ -83,6 +91,16 @@ public class CharacterController : MonoBehaviour
                     
                     GameManager.instance.FinishedMovement();
                 }
+            }
+        }
+
+        if (bulletTrailCounter > 0)
+        {
+            bulletTrailCounter -= Time.deltaTime;
+
+            if (bulletTrailCounter <= 0)
+            {
+                bulletTrailLine.gameObject.SetActive(false);
             }
         }
     }
@@ -224,10 +242,19 @@ public class CharacterController : MonoBehaviour
             
                 PlayerInputMenu.instance.ShowErrorText("Shot Missed");
             }
+            
+            bulletTrailLine.SetPosition(0, shootPoint.position);
+            bulletTrailLine.SetPosition(1, hit.point);
         }
         else
         {
             PlayerInputMenu.instance.ShowErrorText("Shot Missed");
+            
+            bulletTrailLine.SetPosition(0, shootPoint.position);
+            bulletTrailLine.SetPosition(1, shootPoint.position + (shootDirection * shootRange));
         }
+        
+        bulletTrailLine.gameObject.SetActive(true);
+        bulletTrailCounter = bulletTrailDuration;
     }
 }
